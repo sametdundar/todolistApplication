@@ -6,12 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
+
+import sametdundar.com.sametdundartodolistapp.NoteBookDetailActivity;
 import sametdundar.com.sametdundartodolistapp.R;
 import sametdundar.com.sametdundartodolistapp.models.Note;
 
@@ -40,6 +46,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
         Note note = list.get(position);
 
+        holder.cbStatus.setOnCheckedChangeListener(null);
         holder.tvTitle.setText(note.getName());
         holder.tvDescription.setText(note.getDescription());
         holder.tvDeadLine.setText(note.getDeadLine());
@@ -57,6 +64,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 drDelete.removeValue();
             }
         });
+
+        holder.cbStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                DatabaseReference drUpdate = databaseNote.child(note.getId());
+                Note newNote = new Note(note.getId(), note.getNotebookId(), note.getName(), note.getDescription(), note.getDeadLine(), b);
+                drUpdate.setValue(newNote);
+            }
+        });
+
     }
 
     @Override

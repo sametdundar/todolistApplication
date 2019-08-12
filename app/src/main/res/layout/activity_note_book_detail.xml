@@ -59,6 +59,13 @@
                 android:layout_below="@id/ll_linear"
                 />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_email"
+                ></androidx.recyclerview.widget.RecyclerView>
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

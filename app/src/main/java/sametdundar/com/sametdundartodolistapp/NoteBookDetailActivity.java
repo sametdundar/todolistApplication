@@ -35,16 +35,19 @@ public class NoteBookDetailActivity extends BaseActivity {
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
+    @BindView(R.id.rv_complete)
+    RecyclerView rvComplete;
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
-    public static String NOTEBOOK ="notebook";
+    public static String NOTEBOOK = "notebook";
     Notebook notebook;
     ArrayList<Note> noteArrayList = new ArrayList<Note>();
+    ArrayList<Note> noteCompleteArrayList = new ArrayList<Note>();
 
     public static void startNoteBookDetail(Context context, Notebook notebook) {
         Intent intent = new Intent(context, NoteBookDetailActivity.class);
-        intent.putExtra(NOTEBOOK,notebook);
+        intent.putExtra(NOTEBOOK, notebook);
         context.startActivity(intent);
     }
 
@@ -77,15 +80,16 @@ public class NoteBookDetailActivity extends BaseActivity {
         }
         databaseNote = FirebaseDatabase.getInstance().getReference("note");
 
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        NoteAdapter noteAdapter = new NoteAdapter(NoteBookDetailActivity.this,noteArrayList,databaseNote);
+        NoteAdapter noteAdapter = new NoteAdapter(NoteBookDetailActivity.this, noteArrayList, databaseNote);
         recyclerView.setAdapter(noteAdapter);
 
+        rvComplete.setLayoutManager(new LinearLayoutManager(this));
+        NoteAdapter noteCompleteAdapter = new NoteAdapter(NoteBookDetailActivity.this, noteCompleteArrayList, databaseNote);
+        rvComplete.setAdapter(noteCompleteAdapter);
 
-        Log.e(NOTEBOOK,notebook.getNoteBookName());
+
+        Log.e(NOTEBOOK, notebook.getNoteBookName());
         tvTitle.setText(notebook.getNoteBookName());
 
         databaseNote.addValueEventListener(new ValueEventListener() {
@@ -93,20 +97,26 @@ public class NoteBookDetailActivity extends BaseActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 noteArrayList.clear();
-                for(DataSnapshot noteSnapshot : dataSnapshot.getChildren()){
+                noteCompleteArrayList.clear();
+                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
 
-                    Log.e("note",noteSnapshot.toString());
+                    Log.e("note", noteSnapshot.toString());
 
                     Note note = noteSnapshot.getValue(Note.class);
-                    Log.e("note",String.valueOf(note.getDescription()));
+                    Log.e("note", String.valueOf(note.getDescription()));
 
                     if (note.getNotebookId().equals(notebook.getId())) {
-                        noteArrayList.add(note);
+                        if (note.isStatus()) {
+                            noteCompleteArrayList.add(note);
+                        } else {
+                            noteArrayList.add(note);
+                        }
                     }
 
                 }
 
                 noteAdapter.notifyDataSetChanged();
+                noteCompleteAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -118,25 +128,32 @@ public class NoteBookDetailActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_delete)
-    public void btnDelete(){
+    public void btnDelete() {
 
         DatabaseReference drDelete = FirebaseDatabase.getInstance().getReference("notebook").child(notebook.getId());
         drDelete.removeValue();
         finish();
 
     }
-    @OnClick(R.id.btn_add)
-    public void btnAdd(){
 
-        AddNoteActivity.startAddNoteActivity(this,notebook.getId());
+    @OnClick(R.id.btn_add)
+    public void btnAdd() {
+
+        AddNoteActivity.startAddNoteActivity(this, notebook.getId());
 
     }
 
-    @OnClick(R.id.btn_email)public void btnEmail(){
-        String data= notebook.getNoteBookName() +"\n";
-        for(Note note: noteArrayList){
-            data = data +" \n "+ note.getName() + " : " + note.getDescription() ;
+    @OnClick(R.id.btn_email)
+    public void btnEmail() {
+        String data = notebook.getNoteBookName() + "\n";
+        for (Note note : noteArrayList) {
+            data = data + " \n " + note.getName() + " : " + note.getDescription();
         }
+
+        for (Note note : noteCompleteArrayList) {
+            data = data + " \n " + note.getName() + " : " + note.getDescription();
+        }
+
 
         sendEmail(data);
     }
