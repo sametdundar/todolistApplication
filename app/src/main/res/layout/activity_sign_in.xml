@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edittext_email"
+        style="@style/editTextStyle"
+        android:hint="@string/signUp_et_mail" />
+
+    <EditText
+        android:id="@+id/edittext_sifre"
+        style="@style/editTextStyle"
+        android:layout_below="@+id/edittext_email"
+        android:hint="@string/signUp_et_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button_login"
+        style="@style/buttonStyleSignup"
+        android:layout_below="@+id/edittext_sifre"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_signup"
+        android:text="@string/signIn_btn"
+        android:textColor="@color/colorButtonSignUp"></Button>
+
+    <TextView
+        android:id="@+id/textview_sifremiUnuttum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/signIn_tv_forgetPassword"
+        android:textColor="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/button_signup"
+        style="@style/buttonStyleSignup"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_signup"
+        android:text="@string/signUp_btn"
+        android:textColor="@color/colorButtonSignUp"></Button>
+
+
+</RelativeLayout>

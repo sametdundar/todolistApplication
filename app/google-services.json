@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "911743621823",
+    "firebase_url": "https://sametdundartodolistapp.firebaseio.com",
+    "project_id": "sametdundartodolistapp",
+    "storage_bucket": "sametdundartodolistapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911743621823:android:44864736827532c5",
+        "android_client_info": {
+          "package_name": "sametdundar.com.sametdundartodolistapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911743621823-q55hrlu80e963h81f24oftrheg5fvcck.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sametdundar.com.sametdundartodolistapp",
+            "certificate_hash": "c73335be64f1e0ab019ea9fdecd3ff32215ab0bc"
+          }
+        },
+        {
+          "client_id": "911743621823-3og78k6f97qnsoptdcl078sd2vf32qaj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqacqlcKt4z-TTUc1zUrDDLzAxH0ETSK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911743621823-3og78k6f97qnsoptdcl078sd2vf32qaj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

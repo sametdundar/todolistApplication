@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/act_signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            android:orientation="vertical"
+            android:padding="16dp"
+            >
+
+            <EditText
+                android:id="@+id/et_mail"
+                style="@style/editTextStyle"
+                android:hint="@string/signUp_et_mail"
+                />
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/editTextStyle"
+                android:hint="@string/signUp_et_password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_passwordAgain"
+                style="@style/editTextStyle"
+                android:hint="@string/signUp_et_passwordAgain"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_name"
+                style="@style/editTextStyle"
+                android:hint="@string/signUp_et_name" />
+
+            <EditText
+                android:id="@+id/et_surname"
+                style="@style/editTextStyle"
+                android:hint="@string/signUp_et_surname" />
+
+            <Button
+                android:id="@+id/btn_signUp"
+                style="@style/buttonStyleSignup"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_signup"
+                android:text="@string/signUp_btn"
+                android:textColor="@color/colorButtonSignUp" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
